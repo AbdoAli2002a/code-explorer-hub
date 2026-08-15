@@ -202,6 +202,7 @@ function Protractor({ measure }: { measure: number }) {
   const r = 120;
   const ticks = Array.from({ length: 37 }, (_, i) => i * 5);
   const rad = (a: number) => (a * Math.PI) / 180;
+  const rd = (n: number) => Math.round(n * 100) / 100;
   return (
     <svg viewBox="0 0 300 190" className="w-full" role="img" aria-label={`Protractor reading ${measure} degrees`}>
       <path
@@ -216,10 +217,10 @@ function Protractor({ measure }: { measure: number }) {
         return (
           <line
             key={t}
-            x1={cx + inner * Math.cos(rad(t))}
-            y1={cy - inner * Math.sin(rad(t))}
-            x2={cx + r * Math.cos(rad(t))}
-            y2={cy - r * Math.sin(rad(t))}
+            x1={rd(cx + inner * Math.cos(rad(t)))}
+            y1={rd(cy - inner * Math.sin(rad(t)))}
+            x2={rd(cx + r * Math.cos(rad(t)))}
+            y2={rd(cy - r * Math.sin(rad(t)))}
             stroke="var(--muted-foreground)"
             strokeWidth={major ? 1.4 : 0.7}
           />
@@ -228,8 +229,8 @@ function Protractor({ measure }: { measure: number }) {
       {[0, 45, 90, 135, 180].map((t) => (
         <text
           key={t}
-          x={cx + (r - 30) * Math.cos(rad(t))}
-          y={cy - (r - 30) * Math.sin(rad(t)) + 4}
+          x={rd(cx + (r - 30) * Math.cos(rad(t)))}
+          y={rd(cy - (r - 30) * Math.sin(rad(t)) + 4)}
           fontSize="10"
           textAnchor="middle"
           fill="var(--muted-foreground)"
@@ -242,8 +243,8 @@ function Protractor({ measure }: { measure: number }) {
       <line
         x1={cx}
         y1={cy}
-        x2={cx + r * Math.cos(rad(measure))}
-        y2={cy - r * Math.sin(rad(measure))}
+        x2={rd(cx + r * Math.cos(rad(measure)))}
+        y2={rd(cy - r * Math.sin(rad(measure)))}
         stroke="var(--accent)"
         strokeWidth="3"
       />

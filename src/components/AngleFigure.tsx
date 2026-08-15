@@ -15,7 +15,8 @@ const R = 78;
 
 function pt(cx: number, cy: number, angle: number, r: number) {
   const rad = (angle * Math.PI) / 180;
-  return [cx + r * Math.cos(rad), cy - r * Math.sin(rad)] as const;
+  const round = (n: number) => Math.round(n * 100) / 100;
+  return [round(cx + r * Math.cos(rad)), round(cy - r * Math.sin(rad))] as const;
 }
 
 /** Draws a labelled angle built from two rays sharing a vertex. */
