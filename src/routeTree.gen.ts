@@ -10,7 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ActivitiesRouteImport } from './routes/activities'
 import { Route as AngleTypesRouteImport } from './routes/angle-types'
+import { Route as ExamplesRouteImport } from './routes/examples'
 import { Route as RelationshipsRouteImport } from './routes/relationships'
 
 const IndexRoute = IndexRouteImport.update({
@@ -18,9 +20,19 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ActivitiesRoute = ActivitiesRouteImport.update({
+  id: '/activities',
+  path: '/activities',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AngleTypesRoute = AngleTypesRouteImport.update({
   id: '/angle-types',
   path: '/angle-types',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExamplesRoute = ExamplesRouteImport.update({
+  id: '/examples',
+  path: '/examples',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RelationshipsRoute = RelationshipsRouteImport.update({
@@ -31,31 +43,46 @@ const RelationshipsRoute = RelationshipsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/activities': typeof ActivitiesRoute
   '/angle-types': typeof AngleTypesRoute
+  '/examples': typeof ExamplesRoute
   '/relationships': typeof RelationshipsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/activities': typeof ActivitiesRoute
   '/angle-types': typeof AngleTypesRoute
+  '/examples': typeof ExamplesRoute
   '/relationships': typeof RelationshipsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/activities': typeof ActivitiesRoute
   '/angle-types': typeof AngleTypesRoute
+  '/examples': typeof ExamplesRoute
   '/relationships': typeof RelationshipsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/angle-types' | '/relationships'
+  fullPaths:
+    '/' | '/activities' | '/angle-types' | '/examples' | '/relationships'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/angle-types' | '/relationships'
-  id: '__root__' | '/' | '/angle-types' | '/relationships'
+  to: '/' | '/activities' | '/angle-types' | '/examples' | '/relationships'
+  id:
+    | '__root__'
+    | '/'
+    | '/activities'
+    | '/angle-types'
+    | '/examples'
+    | '/relationships'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ActivitiesRoute: typeof ActivitiesRoute
   AngleTypesRoute: typeof AngleTypesRoute
+  ExamplesRoute: typeof ExamplesRoute
   RelationshipsRoute: typeof RelationshipsRoute
 }
 
@@ -68,11 +95,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/activities': {
+      id: '/activities'
+      path: '/activities'
+      fullPath: '/activities'
+      preLoaderRoute: typeof ActivitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/angle-types': {
       id: '/angle-types'
       path: '/angle-types'
       fullPath: '/angle-types'
       preLoaderRoute: typeof AngleTypesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/examples': {
+      id: '/examples'
+      path: '/examples'
+      fullPath: '/examples'
+      preLoaderRoute: typeof ExamplesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/relationships': {
@@ -87,7 +128,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ActivitiesRoute: ActivitiesRoute,
   AngleTypesRoute: AngleTypesRoute,
+  ExamplesRoute: ExamplesRoute,
   RelationshipsRoute: RelationshipsRoute,
 }
 export const routeTree = rootRouteImport
