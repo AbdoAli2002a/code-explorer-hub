@@ -127,21 +127,25 @@ export function AdjacentFigure({
 }) {
   const cx = size / 2;
   const cy = size / 2 + 20;
-  const rays = [start, start + first, start + first + second];
+  const r0 = start;
+  const r1 = start + first;
+  const r2 = start + first + second;
+  const rays = [r0, r1, r2];
   const names = ["A", "D", "C"];
 
   return (
     <svg viewBox={`0 0 ${size} ${size + 20}`} className={className} role="img" aria-label="Two adjacent angles">
       <path
-        d={`M ${cx} ${cy} L ${pt(cx, cy, rays[0], 36)[0]} ${pt(cx, cy, rays[0], 36)[1]} A 36 36 0 ${first > 180 ? 1 : 0} 0 ${pt(cx, cy, rays[1], 36)[0]} ${pt(cx, cy, rays[1], 36)[1]} Z`}
+        d={`M ${cx} ${cy} L ${pt(cx, cy, r0, 36)[0]} ${pt(cx, cy, r0, 36)[1]} A 36 36 0 ${first > 180 ? 1 : 0} 0 ${pt(cx, cy, r1, 36)[0]} ${pt(cx, cy, r1, 36)[1]} Z`}
         fill="var(--accent)"
         opacity="0.25"
       />
       <path
-        d={`M ${cx} ${cy} L ${pt(cx, cy, rays[1], 52)[0]} ${pt(cx, cy, rays[1], 52)[1]} A 52 52 0 ${second > 180 ? 1 : 0} 0 ${pt(cx, cy, rays[2], 52)[0]} ${pt(cx, cy, rays[2], 52)[1]} Z`}
+        d={`M ${cx} ${cy} L ${pt(cx, cy, r1, 52)[0]} ${pt(cx, cy, r1, 52)[1]} A 52 52 0 ${second > 180 ? 1 : 0} 0 ${pt(cx, cy, r2, 52)[0]} ${pt(cx, cy, r2, 52)[1]} Z`}
         fill="var(--primary)"
         opacity="0.18"
       />
+
       {rays.map((a, i) => {
         const [x, y] = pt(cx, cy, a, R);
         const [lxx, lyy] = pt(cx, cy, a, R + 14);
